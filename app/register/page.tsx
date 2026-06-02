@@ -11,7 +11,7 @@ const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
 })
 
-export default function LoginPage() {
+export default function RegisterPage() {
     const [error, setError] = useState("")
     const [email, setEmail] = useState("")
     const[password, setPassword] = useState("")
@@ -44,19 +44,19 @@ export default function LoginPage() {
                 {/* Left side */}
                 <div className={styles.left}>
                     <form onSubmit={loginHandle} className={styles.form}>
-                        <h1 className={styles.title}>Welcome Back!</h1>
-                        <h2 className={styles.sub}>Sign in to continue to YourMentor</h2>
+                        <h1 className={styles.welcome}>Welcome to YourMentor!</h1>
+                        <h2 className={styles.continue}>Sign up to YourMentor to continue</h2>
                         
                         {/* OAuth login buttons */}
                         <div className={styles.oauth}>
                             <button type="button" className={styles.oauthButton}>
                                 <FcGoogle className={styles.oauthGoogle} />
-                                Continue with Google
+                                Sign up with Google
                             </button>
 
                             <button type="button" className={styles.oauthButton}>
                                 <FaLinkedin className={styles.oauthLinkedin} />
-                                Continue with Linkedin
+                                Sign up with Linkedin
                             </button>
                         </div>
 
@@ -78,10 +78,7 @@ export default function LoginPage() {
                         />
                         
                         {/* Password field */}
-                        <div className={styles.passwordLabel}>
-                            <label className={styles.label}>Password</label>
-                            <Link href="/forgot-password" className={styles.forgot}>Forgot password?</Link>
-                        </div>
+                        <label className={styles.label}>Password</label>
                         <input 
                             className={styles.input}
                             name="password" 
@@ -92,20 +89,14 @@ export default function LoginPage() {
                         />
 
                         {/* Button field */}
-                        <button type="submit" className={styles.signin}>Sign In</button>
-
-                        {/*Sign up field */}
-                        <div className={styles.centerRow}>
-                            <label className={styles.noAccount}>Don't have an account? </label>
-                            <Link href="/register" className={styles.signup}>Sign Up</Link>
-                        </div>
+                        <button type="submit" className={styles.signup}>Sign Up</button>
                         
                     </form>
                 </div>
 
                 {/* Right side */}
                 <div className={styles.right}>
-                    <img src="/stock.avif" className={styles.imageCover}/>
+                    <img src="/virtual.jpg" className={styles.imageCover}/>
                     <div className={styles.fade} />
                 </div>
             </div>

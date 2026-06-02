@@ -38,12 +38,12 @@
     gap: 1rem;
 }
 
-.title {
+.welcome {
     font-size: 1.5rem;
     font-weight: 700;
 }
 
-.sub {
+.continue {
     font-size: 0.875rem;
     color: rgba(156, 163, 175, 1);
     font-weight: 300;
@@ -144,7 +144,7 @@
     text-decoration: underline;
 }
 
-.signin {
+.signup {
     width: 100%;
     padding: 0.5rem;
 
@@ -158,7 +158,7 @@
     cursor: pointer;
 }
 
-.signin:hover {
+.signup:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -175,19 +175,6 @@
     font-size: 0.875rem;
     margin-bottom: 0.25rem;
     display: block;
-}
-
-.signup {
-    font-size: 0.875rem;
-    color: #9ca3af;
-    margin-bottom: 0.25rem;
-    transition: all 0.2s ease;
-    text-decoration: none;
-}
-
-.signup:hover {
-    color: white;
-    text-decoration: underline;
 }
 
 .right {
