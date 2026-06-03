@@ -1,5 +1,7 @@
+// npx prisma migrate dev --name init --> THIS CREATES THE INITIAL SCHEMA
+// npx prisma migrate dev --name add_username --> THIS UPDATES THE CURRENT SCHEMA
 "use client";
-import {useState} from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Roboto } from "next/font/google"
 import { FcGoogle } from "react-icons/fc"
@@ -14,18 +16,19 @@ const roboto = Roboto({
 export default function RegisterPage() {
     const [error, setError] = useState("")
     const [email, setEmail] = useState("")
-    const[password, setPassword] = useState("")
+    const [password, setPassword] = useState("")
     
-    const loginHandle = async (e: React.FormEvent) => {
+    const registerHandle = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch("/api/login", {
+
+        const res = await fetch("/api/register", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email, password})
-        });
+            body: JSON.stringify({ email, password })
+        })
 
         if (!res.ok) {
-            setError("Failed to login.")
+            setError("Failed to sign up.")
             return
         }
 
@@ -43,7 +46,7 @@ export default function RegisterPage() {
 
                 {/* Left side */}
                 <div className={styles.left}>
-                    <form onSubmit={loginHandle} className={styles.form}>
+                    <form onSubmit={registerHandle} className={styles.form}>
                         <h1 className={styles.welcome}>Welcome to YourMentor!</h1>
                         <h2 className={styles.continue}>Sign up to YourMentor to continue</h2>
                         
