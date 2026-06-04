@@ -1,9 +1,8 @@
 "use client";
-import {useState} from "react"
-import Link from "next/link"
-import { Roboto } from "next/font/google"
-import styles from "./page.module.css"
+import {useState} from "react";
+import { Roboto } from "next/font/google";
 import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -11,13 +10,23 @@ const roboto = Roboto({
 })
 
 export default function ForgotPasswordPage() {
-    const [error, setError] = useState("")
-    const [email, setEmail] = useState("")
+    const [error, setError] = useState("");
+    const [email, setEmail] = useState("");
 
-    const router = useRouter()
+    const router = useRouter();
+    
     const handleForgotPassword = async (e: React.FormEvent) => {
         e.preventDefault();
-        router.push("/verify-code")
+
+        await fetch("/api/auth/forgot-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+        });
+        
+        router.push("/verify-code");
     }
 
     return (
@@ -37,6 +46,8 @@ export default function ForgotPasswordPage() {
 
                         {/* Email field */}
                         <input 
+                            type="email"
+                            required
                             className={styles.input}
                             name="email" 
                             placeholder="Email" 
@@ -57,5 +68,5 @@ export default function ForgotPasswordPage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

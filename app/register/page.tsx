@@ -19,6 +19,7 @@ export default function RegisterPage() {
     const [error, setError] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
     const router = useRouter();
     
     const handleRegister = async (e: React.FormEvent) => {
@@ -87,6 +88,8 @@ export default function RegisterPage() {
                         {/* Email field */}
                         <label className={styles.label}>Email</label>
                         <input 
+                            type="email"
+                            required
                             className={styles.input}
                             name="email" 
                             placeholder="Email" 
@@ -118,5 +121,5 @@ export default function RegisterPage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

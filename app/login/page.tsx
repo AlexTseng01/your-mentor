@@ -74,6 +74,8 @@ export default function LoginPage() {
                         {/* Email field */}
                         <label className={styles.label}>Email</label>
                         <input 
+                            type="email"
+                            required
                             className={styles.input}
                             name="email" 
                             placeholder="Email" 
@@ -114,5 +116,5 @@ export default function LoginPage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

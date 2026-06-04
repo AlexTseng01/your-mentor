@@ -1,9 +1,9 @@
 "use client";
-import {useState} from "react"
-import Link from "next/link"
-import { Roboto } from "next/font/google"
-import styles from "./page.module.css"
-import { useRouter } from "next/navigation"
+import {useState} from "react";
+import Link from "next/link";
+import { Roboto } from "next/font/google";
+import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -11,15 +11,23 @@ const roboto = Roboto({
 })
 
 export default function VerifyCodePage() {
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
     const [code, setCode] = useState<string[]>(["", "", "", "", "", ""]);
 
-    const router = useRouter()
+    const router = useRouter();
+
     const handleVerifyCode = async (e: React.FormEvent) => {
-        e.preventDefault()
-        const finalCode = code.join("")
-        console.log(finalCode)
-        router.push("/change-password")
+        e.preventDefault();
+
+        const finalCode = code.join("");
+
+        if (finalCode.length !== 6) {
+            setError("Please enter the a 6-digit code")
+            return;
+        }
+
+        // console.log(finalCode);
+        router.push("/change-password");
     }
 
     return (
@@ -112,5 +120,5 @@ export default function VerifyCodePage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
