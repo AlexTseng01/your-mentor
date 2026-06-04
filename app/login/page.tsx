@@ -1,10 +1,12 @@
 "use client";
-import {useState} from "react"
-import Link from "next/link"
-import { Roboto } from "next/font/google"
-import { FcGoogle } from "react-icons/fc"
-import { FaLinkedin } from "react-icons/fa"
-import styles from "./page.module.css"
+import {useState} from "react";
+import { Roboto } from "next/font/google";
+import { FcGoogle } from "react-icons/fc";
+import { FaLinkedin } from "react-icons/fa";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "./page.module.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -12,13 +14,26 @@ const roboto = Roboto({
 })
 
 export default function LoginPage() {
-    const [error, setError] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    
+    const [error, setError] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const router = useRouter();
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        window.location.href = "/"
+        
+        const res = await signIn("credentials", {
+            redirect: false,
+            email,
+            password,
+        })
+
+        if (res?.ok) {
+            router.push("/");
+        }
+        else {
+            setError("Invalid email or password");
+        }
     }
 
     return (
