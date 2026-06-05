@@ -18,6 +18,9 @@ model User {
   image         String?
   emailVerified DateTime?
 
+  reset_code          String?
+  reset_code_expires  DateTime?
+
   accounts      Account[]
   sessions      Session[]
 }

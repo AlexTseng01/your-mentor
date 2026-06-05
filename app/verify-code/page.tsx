@@ -26,7 +26,31 @@ export default function VerifyCodePage() {
             return;
         }
 
-        // console.log(finalCode);
+        const email = new URLSearchParams(window.location.search).get("email");
+        
+        if (!email) {
+            setError("Missing email. Restart reset flow.");
+            return;
+        }
+
+        const res = await fetch("/api/auth/verify-code", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email,
+                code: finalCode,
+            }),
+        })
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            setError(data.error || "Invalid code")
+            return;
+        }
+
         router.push("/change-password");
     }
 

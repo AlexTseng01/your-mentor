@@ -1,19 +1,26 @@
 import { Resend } from "resend";
+import { prisma } from "@/lib/prisma";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
     try {
         const { email } = await req.json();
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-        console.log("EMAIL RECEIVED:", email);
-        console.log("API KEY EXISTS:", !!process.env.RESEND_API_KEY);
+        await prisma.user.update({
+            where: { email },
+            data: {
+                reset_code: code,
+                reset_code_expires: new Date(Date.now() + 5 * 60 * 1000),
+            },
+        })
 
         const result = await resend.emails.send({
-            from: "Your Mentor <onboarding@resend.dev>",
+            from: "YourMentor <onboarding@resend.dev>",
             to: email,
-            subject: "Test Email",
-            html: "<p>If you see this, email works</p>",
+            subject: "YourMentor Verification Code",
+            html: `<p>Your verification code is: ${code}</p>`,
         });
 
         console.log("RESEND RESULT:", result);

@@ -26,7 +26,7 @@ export default function ForgotPasswordPage() {
             body: JSON.stringify({ email }),
         });
         
-        router.push("/verify-code");
+        router.push(`/verify-code?email=${email}`);
     }
 
     return (
