@@ -15,9 +15,31 @@ export default function ChangePasswordPage() {
     const [confirmPassword, setConfirmPassword] = useState("")
     
     const router = useRouter()
+
     const handleChangePassword = async (e: React.FormEvent) => {
         e.preventDefault();
-        router.push("/login")
+
+        setError("");
+
+        if (newPassword !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
+        const res = await fetch("/api/change-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ newPassword }),
+        }) 
+
+        if (res.ok) {
+            router.push("/login")
+        }
+        else {
+            setError("Failed to change password");
+        }
     }
 
     return (
